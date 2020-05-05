@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vue-cli-service serve --mode=development",
+    "build": "vue-cli-service build --mode=production",
+    "test": "vue-cli-service build --mode=test",
+    "lint": "vue-cli-service lint "
   },
   "dependencies": {
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
+    "mockjs": "^1.1.0",
+    "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2",
+    "stylus-loader": "^3.0.2",
     "vue": "^2.6.11",
-    "vue-awesome-swiper": "^4.1.1",
+    "vue-awesome-swiper": "^3.1.3",
+    "vue-axios": "^2.1.5",
     "vue-cookie": "^1.1.4",
     "vue-lazyload": "^1.3.3",
     "vue-router": "^3.1.6",
@@ -34,6 +39,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "jsonp": "^0.2.1",
+    "swiper": "^5.3.8",
     "vue-template-compiler": "^2.6.11"
   },
   "description": "## Project setup ``` npm install ```",
