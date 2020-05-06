@@ -63,13 +63,13 @@
           <a v-bind:href="'/#/product/'+item.id"
              v-for="(item,index) in adsList"
              v-bind:key="index">
-            <img :src="item.img"
+            <img v-lazy="item.img"
                  alt="">
           </a>
         </div>
         <div class="banner">
           <a href="/#/product/30">
-            <img src="/imgs/banner-1.png"
+            <img v-lazy="'/imgs/banner-1.png'"
                  alt="">
           </a>
         </div>
@@ -79,7 +79,7 @@
           <h2>手机</h2>
           <div class="wrapper">
             <div class="banner-left">
-              <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg"
+              <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'"
                      alt=""></a>
             </div>
             <div class="list-box">
@@ -91,7 +91,7 @@
                      v-bind:key="j">
                   <span v-bind:class="{'new-pro':j%2==0}">新品</span>
                   <div class="item-img">
-                    <img :src="item.mainImage"
+                    <img v-lazy="item.mainImage"
                          alt="">
                   </div>
                   <div class="item-info">
@@ -108,10 +108,23 @@
       </div>
     </div>
     <service-bar></service-bar>
+    <modal title="提示"
+           sureText="查看购物车"
+           btnType="1"
+           modalType="middle"
+           :showModal="showModal"
+           @submit="goToCart"
+           @cancel="showModal=false">
+      <!-- 名为body的插槽 -->
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
 import ServiceBar from './../components/ServiceBar'
+import Modal from './../components/Modal'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
@@ -120,7 +133,8 @@ export default {
   components: {
     swiper,
     swiperSlide,
-    ServiceBar
+    ServiceBar,
+    Modal
 
   },
   data () {
@@ -202,7 +216,8 @@ export default {
           img: '/imgs/ads/ads-4.jpg'
         }
       ],
-      phoneList: []
+      phoneList: [],
+      showModal: false
     }
   },
   mounted () {
@@ -217,9 +232,23 @@ export default {
         }
       }).then((res) => {
         // slice和splice的区别 https://blog.csdn.net/wxl1555/article/details/79388292
+        // 第六个开始切，前面导航已经切过6个长图，后面是正常点的
         res.list = res.list.slice(6, 14)
         this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
       })
+    },
+    addCart (id) {
+      this.showModal = true
+      //   this.axios.post('/carts', {
+      //     productId: id,
+      //     selected: true
+      //   }).then((res) => {
+      //     this.showModal = true
+      //     this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
+      //   })
+    },
+    goToCart () {
+      this.$router.push('/cart')
     }
   }
 }

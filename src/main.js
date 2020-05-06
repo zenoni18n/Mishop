@@ -5,13 +5,20 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from './router'
 import store from './store'
+import VueLazyLoad from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 // import env from './../env'
 
 Vue.use(VueAxios, axios)
 Vue.use(Router)
+Vue.use(VueCookie)
+Vue.use(VueLazyLoad, {
+  // 加载时用svg图标显示
+  loading: '/imgs/loading-svg/loading-bars.svg'
+})
 Vue.config.productionTip = false
 // mock开关 mockjs
-const mock = true
+const mock = false
 if (mock) {
   require('./mock/api')
 }
@@ -25,15 +32,25 @@ axios.defaults.timeout = 8000
 // 接口错误拦截
 axios.interceptors.response.use(function (response) {
   const res = response.data
+  const path = location.hash
   if (res.status === 0) {
     return res.data
   } else if (res.status === 10) {
-    window.location.href = '/#/login'
+    if (path !== '#/index') {
+      window.location.href = '/#/login'
+    }
     return Promise.reject(res)
   } else {
-
+    alert(res.msg)
+    // Message.warning(res.msg);
+    return Promise.reject(res)
   }
 }
+  // , (error) => {
+  // const res = error.response
+  // Message.error(res.data.message)
+  // return Promise.reject(error)
+  // }
 )
 new Vue({
   router,

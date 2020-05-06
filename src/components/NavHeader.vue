@@ -21,7 +21,7 @@
              class="my-cart"
              @click="goToCart">
             <span class="icon-cart"></span>
-            购物车(0)</a>
+            购物车({{cartCount}})</a>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
                   <a :href="'/#/product/'+item.id"
                      target="_blank">
                     <div class="pro-img">
-                      <img :src="item.mainImage"
+                      <img v-lazy="item.mainImage"
                            :alt="item.subtitle">
                     </div>
                     <div class="pro-name">{{item.name}}</div>
@@ -62,7 +62,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-1.jpg'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-1.jpg'"
                            alt="">
                     </div>
                     <div class="pro-name">小米壁画电视 65英寸</div>
@@ -73,7 +73,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-2.jpg'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-2.jpg'"
                            alt="">
                     </div>
                     <div class="pro-name">小米全面屏电视E55A</div>
@@ -84,7 +84,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-3.png'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-3.png'"
                            alt="">
                     </div>
                     <div class="pro-name">小米电视4A 32英寸</div>
@@ -95,7 +95,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-4.jpg'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-4.jpg'"
                            alt="">
                     </div>
                     <div class="pro-name">小米电视4A 55英寸</div>
@@ -106,7 +106,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-5.jpg'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-5.jpg'"
                            alt="">
                     </div>
                     <div class="pro-name">小米电视4A 65英寸</div>
@@ -117,7 +117,7 @@
                   <a href=""
                      target="_blank">
                     <div class="pro-img">
-                      <img src="'/imgs/nav-img/nav-3-6.png'"
+                      <img v-lazy="'/imgs/nav-img/nav-3-6.png'"
                            alt="">
                     </div>
                     <div class="pro-name">查看全部</div>
@@ -140,13 +140,26 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'NavHeader',
   data () {
     return {
-      username: '',
+
       phoneList: []
     }
+  },
+  // computed可以解决延迟问题
+  computed: {
+    // username先取 为空 再调用接口才有的值，获取不到 接口有延迟
+
+    // username () {
+    //   return this.$store.state.username
+    // },
+    // cartCount () {
+    //   return this.$store.state.cartCount
+    // }
+    ...mapState(['username', 'cartCount'])
   },
   filters: {
     currency (val) {

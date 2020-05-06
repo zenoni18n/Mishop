@@ -25,11 +25,32 @@ export default {
     // this.axios.get('/mock/user/login.json').then((res) => { this.res = res })
     // 二。通过easy-mock平台实现虚拟mock
     // 三。本地集成mockjs实现
-    this.axios.get('/user/login').then((res) => { this.res = res })
+    // this.axios.get('/user/login').then((res) => { this.res = res })
+    // if (this.$cookie.get('userId')) {
+    this.getUser()
+    this.getCartCount()
+    // }
+  },
+  methods: {
+    // 刷新网页记录会没，需要拉取信息到浏览器
+    getUser () {
+      this.axios.get('/user').then((res) => {
+        // todo保存到vuex
+        this.$store.dispatch('saveUserName', res.username)
+      })
+    },
+    getCartCount () {
+      this.axios.get('/carts/products/sum').then((res) => {
+        // 就返回一个值，所以直接res data:0
+        this.$store.dispatch('saveCartCount', res)
+      })
+    }
   }
 }
 
 </script>
-<style>
+<style lang="scss">
 @import "./assets/scss/reset.scss";
+@import "./assets/scss/config.scss";
+@import "./assets/scss/button.scss";
 </style>

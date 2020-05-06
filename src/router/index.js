@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../pages/home.vue'
 import Index from '../pages/index'
+import Login from '../pages/login'
 import Product from '../pages/product'
 import Detail from '../pages/detail'
 import Cart from '../pages/cart'
@@ -31,6 +32,10 @@ const routes = [
       name: 'detail',
       component: Detail
     }]
+  }, {
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
     path: '/cart',
