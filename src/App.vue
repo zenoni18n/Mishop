@@ -34,13 +34,15 @@ export default {
   methods: {
     // 刷新网页记录会没，需要拉取信息到浏览器
     getUser () {
-      this.axios.get('/user').then((res) => {
+      // res={}避免报错
+      this.axios.get('/user').then((res = {}) => {
         // todo保存到vuex
         this.$store.dispatch('saveUserName', res.username)
       })
     },
     getCartCount () {
-      this.axios.get('/carts/products/sum').then((res) => {
+      // 不登陆也是0
+      this.axios.get('/carts/products/sum').then((res = 0) => {
         // 就返回一个值，所以直接res data:0
         this.$store.dispatch('saveCartCount', res)
       })

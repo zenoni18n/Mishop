@@ -39,6 +39,7 @@ axios.interceptors.response.use(function (response) {
     if (path !== '#/index') {
       window.location.href = '/#/login'
     }
+    // 加入购物车的时候没登陆依旧可以访问购物车界面的解决方式
     return Promise.reject(res)
   } else {
     alert(res.msg)
