@@ -71,6 +71,7 @@
       </div>
     </div>
     <service-bar></service-bar>
+
   </div>
 </template>
 <script>
@@ -83,6 +84,7 @@ export default {
     return {
       id: this.$route.params.id, // 获取商品ID
       err: '',
+
       version: 1, // 商品版本切换
       product: {}, // 商品信息
       swiperOption: {
@@ -115,7 +117,7 @@ export default {
         selected: true
       }).then((res = { cartProductVoList: 0 }) => {
         this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
-        // this.$router.push('/cart');
+        this.$router.push('/cart')
       })
     }
   }

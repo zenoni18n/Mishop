@@ -2,7 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import Router from 'vue-router'
 import axios from 'axios'
+// 可以全局挂载，用this.axios
 import VueAxios from 'vue-axios'
+import 'element-ui/lib/theme-chalk/index.css'
+import { Message } from 'element-ui'
 import router from './router'
 import store from './store'
 import VueLazyLoad from 'vue-lazyload'
@@ -12,10 +15,14 @@ import VueCookie from 'vue-cookie'
 Vue.use(VueAxios, axios)
 Vue.use(Router)
 Vue.use(VueCookie)
+// 全局注册element 不需要
+// Vue.use(Message)
 Vue.use(VueLazyLoad, {
   // 加载时用svg图标显示
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
+// 全局注册element
+Vue.prototype.$message = Message
 Vue.config.productionTip = false
 // mock开关 mockjs
 const mock = false
@@ -42,17 +49,15 @@ axios.interceptors.response.use(function (response) {
     // 加入购物车的时候没登陆依旧可以访问购物车界面的解决方式
     return Promise.reject(res)
   } else {
-    alert(res.msg)
-    // Message.warning(res.msg);
+    // alert(res.msg)
+    this.$message.warning(res.msg)
     return Promise.reject(res)
   }
-}
-  // , (error) => {
+}, (error) => {
   // const res = error.response
-  // Message.error(res.data.message)
-  // return Promise.reject(error)
-  // }
-)
+  this.$message.error('请输入用户名和密码')
+  return Promise.reject(error)
+})
 new Vue({
   router,
   store,

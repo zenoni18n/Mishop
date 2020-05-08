@@ -14,7 +14,8 @@
              v-if="!username"
              @click="login">登录</a>
           <a href="javascript:;"
-             v-if="username">退出</a>
+             v-if="username"
+             @click="logout">退出</a>
           <a href="/#/order/list"
              v-if="username">我的订单</a>
           <a href="javascript:;"
@@ -145,7 +146,6 @@ export default {
   name: 'NavHeader',
   data () {
     return {
-
       phoneList: []
     }
   },
@@ -169,6 +169,13 @@ export default {
   },
   mounted () {
     this.getProductList()
+    /** login传过来的from参数来判断是不是登陆页面进来
+     * 的，是就调用接口，不是就无视，优化性能
+     */
+    const params = this.$route.params
+    if (params && params.from === 'login') {
+      this.getCartCount()
+    }
   },
   methods: {
     login () {
@@ -186,6 +193,22 @@ export default {
     },
     goToCart () {
       this.$router.push('/cart')
+    },
+    getCartCount () {
+      this.axios.get('/carts/products/sum').then((res = 0) => {
+        this.$store.dispatch('saveCartCount', res)
+      })
+    },
+    logout () {
+      this.axios.post('/user/logout').then(() => {
+        this.$message.success('退出成功')
+        // 把cookie缓冲清掉 userid='' 保存日期为-1
+        this.$cookie.set('userId', '', { expires: '-1' })
+        // 名称清空
+        this.$store.dispatch('saveUserName', '')
+        // 购物车清空
+        this.$store.dispatch('saveCartCount', '0')
+      })
     }
   }
 }

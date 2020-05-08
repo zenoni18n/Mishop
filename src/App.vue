@@ -26,10 +26,12 @@ export default {
     // 二。通过easy-mock平台实现虚拟mock
     // 三。本地集成mockjs实现
     // this.axios.get('/user/login').then((res) => { this.res = res })
-    // if (this.$cookie.get('userId')) {
-    this.getUser()
-    this.getCartCount()
-    // }
+
+    // 没有登陆就不调用接口，没有意义
+    if (this.$cookie.get('userId')) {
+      this.getUser()
+      this.getCartCount()
+    }
   },
   methods: {
     // 刷新网页记录会没，需要拉取信息到浏览器

@@ -49,7 +49,9 @@
   </div>
 </template>
 <script>
+// import { Message } from 'element-ui'
 import { mapActions } from 'vuex'
+// import { Session } from 'inspector'
 export default {
   name: 'login',
   data () {
@@ -67,27 +69,31 @@ export default {
         username,
         password
       }).then((res) => {
-        this.$cookie.set('userId', res.id, { expires: '1M' })
+        // Session会话，需要把浏览器关掉Session缓存才会删掉
+        this.$cookie.set('userId', res.id, { expires: 'Session' })
         // this.$store.dispatch('saveUserName', res.username)
         this.saveUserName(res.username)
-        // this.$router.push({
-        //   name: 'index',
-        //   params: {
-        //     from: 'login'
-        //   }
-        // })
-        this.$router.push('/index')
+        this.$router.push({
+          /** query 路径用path,params 路径用name，把from传给
+          NavHeader获取购物车数量，这样登陆到主页就获取一次
+           节省性能，不然刷新会重新调用接口 */
+          name: 'index',
+          params: {
+            from: 'login'
+          }
+        })
+        // this.$router.push('/index')
       })
     },
     ...mapActions(['saveUserName']),
     register () {
       this.axios.post('/user/register', {
-        username: 'zenon1',
-        password: 'zenon1',
-        email: '9323612233@qq.com'
+        username: 'zenon',
+        password: 'zenon',
+        email: '932361223@qq.com'
       }).then(() => {
-        // this.$message.success('注册成功')
-        alert('成功')
+        this.$message.success('注册成功')
+        // alert('成功')
       })
     }
   }
