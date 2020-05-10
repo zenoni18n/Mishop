@@ -154,6 +154,7 @@ export default {
 
     // 购物车下单
     order () {
+      // 每一件都非选的话，返回false
       const isCheck = this.list.every(item => !item.productSelected)
       if (isCheck) {
         this.$message.warning('请选择一件商品')

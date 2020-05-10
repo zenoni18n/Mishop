@@ -16,6 +16,7 @@
     "inspector": "^0.5.0",
     "mockjs": "^1.1.0",
     "node-sass": "^4.14.0",
+    "qrcode": "^1.4.4",
     "sass-loader": "^8.0.2",
     "stylus-loader": "^3.0.2",
     "vue": "^2.6.11",

@@ -54,8 +54,8 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(res)
   }
 }, (error) => {
-  // const res = error.response
-  this.$message.error('请输入用户名和密码')
+  const res = error.response
+  this.$message.error(res.data.message)
   return Promise.reject(error)
 })
 new Vue({
