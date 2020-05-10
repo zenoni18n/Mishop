@@ -5,7 +5,6 @@
         <span>{{tip}}</span>
       </template>
     </order-header> -->
-
     <router-view></router-view>
     <service-bar></service-bar>
     <nav-footer></nav-footer>
@@ -29,6 +28,7 @@ export default {
     NavFooter,
     ServiceBar
   }
+  // 行不通，得先经过order界面才能渲染出来，支付完成跳转的时候不会经过，页面缺失
   // mounted () {
   //   const path = this.$route.path
   //   if (path === '/order/confirm') {
