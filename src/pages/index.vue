@@ -170,12 +170,9 @@ export default {
           id: '46',
           img: '/imgs/slider/slide-3.jpg'
         },
+
         {
-          id: '',
-          img: '/imgs/slider/slide-4.jpg'
-        },
-        {
-          id: '',
+          id: '42',
           img: '/imgs/slider/slide-1.jpg'
         }
       ],

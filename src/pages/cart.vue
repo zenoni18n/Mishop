@@ -88,8 +88,10 @@ export default {
   },
   mounted () {
     this.getCartList()
+    console.log(this)
   },
   methods: {
+
     // 公共赋值
     renderData (res) {
       this.list = res.cartProductVoList || []

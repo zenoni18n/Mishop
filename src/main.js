@@ -24,6 +24,7 @@ Vue.use(VueLazyLoad, {
 // 全局注册element
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
+
 // mock开关 mockjs
 const mock = false
 if (mock) {
@@ -50,12 +51,14 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(res)
   } else {
     // alert(res.msg)
-    this.$message.warning(res.msg)
+    Vue.prototype.$message.warning(res.msg)
+    // this.$message.warning(res.msg)
     return Promise.reject(res)
   }
 }, (error) => {
   const res = error.response
-  this.$message.error(res.data.message)
+  // alert(res.data.message)
+  Vue.prototype.$message.error(res.data.message)
   return Promise.reject(error)
 })
 new Vue({

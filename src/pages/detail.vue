@@ -71,20 +71,33 @@
       </div>
     </div>
     <service-bar></service-bar>
-
+    <modal :title="title"
+           sureText="查看购物车"
+           btnType="1"
+           modalType="middle"
+           :showModal="showModal"
+           @submit="goToCart"
+           @cancel="showModal=false">
+      <!-- 名为body的插槽 -->
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ProductParam from './../components/ProductParam'
 import ServiceBar from './../components/ServiceBar'
+import Modal from './../components/Modal'
 export default {
   name: 'Detail',
   data () {
     return {
       id: this.$route.params.id, // 获取商品ID
       err: '',
-
+      title: '提示',
+      showModal: false,
       version: 1, // 商品版本切换
       product: {}, // 商品信息
       swiperOption: {
@@ -100,7 +113,8 @@ export default {
     swiper,
     swiperSlide,
     ProductParam,
-    ServiceBar
+    ServiceBar,
+    Modal
   },
   mounted () {
     this.getProductInfo()
@@ -117,8 +131,11 @@ export default {
         selected: true
       }).then((res = { cartProductVoList: 0 }) => {
         this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
-        this.$router.push('/cart')
+        this.showModal = true
       })
+    },
+    goToCart () {
+      this.$router.push('/cart')
     }
   }
 }
