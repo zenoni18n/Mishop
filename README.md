@@ -1,8 +1,8 @@
 # mishop
 
-## Project setup
+## Project setup 要用cnpm防止报错
 ```
-npm install
+cnpm install
 ```
 
 ### Compiles and hot-reloads for development
