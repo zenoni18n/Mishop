@@ -12,12 +12,12 @@ module.exports = {
       }
     },
     // // webpack配置  删除预加载，删掉自动缓存的js文件，按需加载，优化性能
-    chainWebpack: (config) => {
-      config.plugins.delete('prefetch')
-    }
+    // chainWebpack: (config) => {
+    // config.plugins.delete('prefetch')
+    // }
   },
   // 生产环境是否生成 sourceMap 文件
-  productionSourceMap: false,
-  publicPath: './',
-  assetsDir: 'static'
+  // productionSourceMap: false,
+  // publicPath: './',
+  // assetsDir: 'static'
 }
