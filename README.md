@@ -1,5 +1,8 @@
 # mishop
 基于vueJS开发的高仿小米商城项目
+具体项目介绍和体验页面地址
+
+https://www.imooc.com/article/305162
 
 # 技术栈
 ```
