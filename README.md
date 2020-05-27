@@ -2,7 +2,7 @@
 基于vueJS开发的高仿小米商城项目
 具体项目介绍和体验页面地址
 
-https://www.imooc.com/article/305162
+https://juejin.im/post/5ece0d496fb9a048036af200
 
 # 技术栈
 ```
