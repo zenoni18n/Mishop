@@ -45,7 +45,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "jsonp": "^0.2.1",
-    "swiper": "^5.3.8",
+    "swiper": "^6.5.1",
     "vue-template-compiler": "^2.6.11"
   },
   "description": "## Project setup ``` npm install ```",
